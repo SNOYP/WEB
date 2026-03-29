@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Температура | Акваріум</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = { darkMode: 'class', theme: { extend: { colors: { aqua: { teal: '#0A7065', dark: '#111111', coral: '#FF7D4A', coralDark: '#E76F51', bgLight: '#F3F4F6', bgDark: '#737373', cardDark: '#525252' } } } } }
+        if (localStorage.getItem('theme') === 'dark') document.documentElement.classList.add('dark');
+        function toggleTheme() { document.documentElement.classList.toggle('dark'); localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light'); }
+        function toggleMenu() { document.getElementById('sidebar').classList.toggle('-translate-x-full'); document.getElementById('overlay').classList.toggle('hidden'); }
+    </script>
+</head>
+<body class="bg-white dark:bg-aqua-bgDark text-black dark:text-white min-h-screen flex transition-colors duration-300 font-sans">
+<div id="overlay" class="fixed inset-0 bg-black/50 z-30 hidden lg:hidden" onclick="toggleMenu()"></div>
+<aside id="sidebar" class="w-64 bg-aqua-teal dark:bg-aqua-dark fixed h-full text-white shadow-xl transition-transform duration-300 z-40 -translate-x-full lg:translate-x-0 flex flex-col">
+    <div class="flex justify-end p-4 lg:hidden">
+        <button onclick="toggleMenu()" class="text-2xl"><i class="fa-solid fa-times"></i></button>
+    </div>
+    <nav class="flex-col pt-4 lg:pt-8 space-y-2 px-4 flex-1 text-lg">
+        <a href="index.html" class="flex items-center gap-3 p-3 font-semibold hover:bg-black/10 rounded-lg transition"><i class="fa-solid fa-house w-6 text-center"></i> Головна</a>
+        <a href="ph.html" class="flex items-center gap-3 p-3 font-semibold hover:bg-black/10 rounded-lg transition"><i class="fa-solid fa-droplet w-6 text-center"></i> Рівень pH</a>
+        <a href="temp.html" class="flex items-center gap-3 p-3 font-semibold bg-black/20 rounded-lg"><i class="fa-solid fa-temperature-half w-6 text-center"></i> Температура</a>
+        <a href="filter.html" class="flex items-center gap-3 p-3 font-semibold hover:bg-black/10 rounded-lg transition"><i class="fa-solid fa-filter w-6 text-center"></i> Фільтр</a>
+        <a href="light.html" class="flex items-center gap-3 p-3 font-semibold hover:bg-black/10 rounded-lg transition"><i class="fa-solid fa-lightbulb w-6 text-center"></i> Освітлення</a>
+    </nav>
+    <div class="p-8 flex justify-center pb-12">
+        <button onclick="toggleTheme()" class="text-3xl hover:text-yellow-300 hover:scale-110 transition-all cursor-pointer"><i class="fa-regular fa-lightbulb"></i></button>
+    </div>
+</aside>
+<div class="flex-1 lg:ml-64 flex flex-col min-h-screen overflow-x-hidden">
+    <header class="bg-aqua-coral dark:bg-black h-20 flex items-center justify-center shadow-md transition-colors duration-300 relative">
+        <button onclick="toggleMenu()" class="absolute left-6 lg:hidden text-2xl text-black dark:text-white"><i class="fa-solid fa-bars"></i></button>
+        <h1 class="text-xl md:text-2xl font-bold text-black dark:text-white transition-colors duration-300 text-center px-12">Температура води акваріума</h1>
+    </header>
+    <main class="p-4 md:p-12 flex-1 flex flex-col xl:flex-row gap-10 xl:gap-16 items-center justify-center max-w-7xl mx-auto w-full">
+        <div class="flex flex-col gap-3 md:gap-5 w-full max-w-sm">
+            <h2 class="text-2xl md:text-3xl font-bold mb-2 md:mb-4 text-center md:text-left">Температура води</h2>
+            <div class="bg-gray-100 dark:bg-aqua-cardDark text-black dark:text-white text-lg md:text-xl py-3 px-6 md:py-4 md:px-8 rounded-full shadow-inner transition-colors flex justify-between"><span>00:00</span><span>24.2°C</span></div>
+            <div class="bg-gray-100 dark:bg-aqua-cardDark text-black dark:text-white text-lg md:text-xl py-3 px-6 md:py-4 md:px-8 rounded-full shadow-inner transition-colors flex justify-between"><span>04:00</span><span>24.0°C</span></div>
+            <div class="bg-aqua-coral dark:bg-aqua-coralDark text-black text-lg md:text-xl py-3 px-6 md:py-4 md:px-8 rounded-full shadow-lg flex justify-between font-semibold transition-colors duration-300"><span>08:00</span><span>24.5°C</span></div>
+            <div class="bg-gray-100 dark:bg-aqua-cardDark text-black dark:text-white text-lg md:text-xl py-3 px-6 md:py-4 md:px-8 rounded-full shadow-inner transition-colors flex justify-between"><span>12:00</span><span>25.1°C</span></div>
+            <div class="bg-gray-100 dark:bg-aqua-cardDark text-black dark:text-white text-lg md:text-xl py-3 px-6 md:py-4 md:px-8 rounded-full shadow-inner transition-colors flex justify-between"><span>16:00</span><span>25.3°C</span></div>
+            <div class="bg-gray-100 dark:bg-aqua-cardDark text-black dark:text-white text-lg md:text-xl py-3 px-6 md:py-4 md:px-8 rounded-full shadow-inner transition-colors flex justify-between"><span>20:00</span><span>24.9°C</span></div>
+        </div>
+        <div class="bg-white dark:bg-aqua-cardDark p-4 md:p-10 rounded-3xl shadow-xl transition-colors w-full max-w-3xl flex">
+            <div class="flex flex-col justify-between text-gray-500 dark:text-gray-300 pr-2 md:pr-6 pb-6 font-medium text-sm md:text-lg">
+                <span>27°C</span><span>26°C</span><span>25°C</span><span>24°C</span><span>23°C</span>
+            </div>
+            <div class="flex-1 flex flex-col">
+                <div class="relative w-full h-[200px] md:h-[300px] border-l-2 border-b-2 border-gray-300 dark:border-gray-500">
+                    <svg viewBox="0 0 500 300" class="absolute inset-0 w-full h-full overflow-visible" preserveAspectRatio="none">
+                        <g stroke="currentColor" class="text-gray-200 dark:text-gray-600 transition-colors" stroke-width="1" stroke-dasharray="4">
+                            <line x1="0" y1="0" x2="500" y2="0" />
+                            <line x1="0" y1="75" x2="500" y2="75" />
+                            <line x1="0" y1="150" x2="500" y2="150" />
+                            <line x1="0" y1="225" x2="500" y2="225" />
+                        </g>
+                        <polyline fill="none" class="stroke-aqua-coral dark:stroke-aqua-coralDark transition-colors" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" points="0,210 100,225 200,187.5 300,142.5 400,127.5 500,157.5" />
+                        <g class="fill-aqua-coral dark:fill-aqua-coralDark stroke-white dark:stroke-aqua-cardDark transition-colors" stroke-width="3">
+                            <circle cx="0" cy="210" r="7" />
+                            <circle cx="100" cy="225" r="7" />
+                            <circle cx="200" cy="187.5" r="7" />
+                            <circle cx="300" cy="142.5" r="7" />
+                            <circle cx="400" cy="127.5" r="7" />
+                            <circle cx="500" cy="157.5" r="7" />
+                        </g>
+                    </svg>
+                </div>
+                <div class="relative w-full h-8 mt-4 text-gray-500 dark:text-gray-300 font-medium text-xs md:text-lg">
+                    <span class="absolute left-[0%] -translate-x-1/2">00:00</span>
+                    <span class="absolute left-[20%] -translate-x-1/2">04:00</span>
+                    <span class="absolute left-[40%] -translate-x-1/2">08:00</span>
+                    <span class="absolute left-[60%] -translate-x-1/2">12:00</span>
+                    <span class="absolute left-[80%] -translate-x-1/2">16:00</span>
+                    <span class="absolute left-[100%] -translate-x-1/2">20:00</span>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+</body>
+</html>
