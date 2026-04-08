@@ -7,6 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="script.js" defer></script>
     <script>
         tailwind.config = { darkMode: 'class', theme: { extend: { colors: { aqua: { teal: '#0A7065', dark: '#111111', coral: '#FF7D4A', coralDark: '#E76F51', bgLight: '#F3F4F6', bgDark: '#737373', cardDark: '#525252' } } } } }
         if (localStorage.getItem('theme') === 'dark') document.documentElement.classList.add('dark');
@@ -36,11 +37,13 @@
         <button onclick="toggleMenu()" class="absolute left-6 lg:hidden text-2xl text-black dark:text-white"><i class="fa-solid fa-bars"></i></button>
         <h1 class="text-xl md:text-2xl font-bold text-black dark:text-white transition-colors duration-300">Рівень pH</h1>
     </header>
-    <main class="p-4 md:p-12 flex-1 flex flex-col items-center justify-center">
-        <div class="text-[100px] md:text-[140px] font-bold mb-4 leading-none text-black dark:text-white transition-colors duration-300">7.2 <span class="text-4xl md:text-6xl">pH</span></div>
-        <div class="relative w-full max-w-2xl mt-12 px-4 md:px-0">
-            <div class="absolute -top-10 md:-top-14 left-[65%] text-[#43A047] text-5xl md:text-7xl font-bold">⌄</div>
-            <div class="flex h-12 md:h-20 rounded-[3rem] overflow-hidden w-full border border-gray-300 dark:border-gray-600 shadow-inner">
+    <main class="p-4 md:p-12 flex-1 flex flex-col items-center justify-center relative">
+        <div class="text-[100px] md:text-[140px] font-bold mb-4 leading-none text-black dark:text-white transition-colors duration-1000">
+            <span id="current-ph" class="transition-colors duration-1000">7.2</span> <span class="text-4xl md:text-6xl">pH</span>
+        </div>
+        <div class="relative w-full max-w-2xl mt-16 px-4 md:px-0">
+            <div id="ph-arrow" class="absolute z-20 -top-12 md:-top-16 left-[50%] text-[#43A047] text-5xl md:text-7xl font-bold transition-all duration-1000 ease-in-out -translate-x-1/2">⌄</div>
+            <div class="flex h-12 md:h-20 rounded-[3rem] overflow-hidden w-full border border-gray-300 dark:border-gray-600 shadow-inner relative z-10">
                 <div class="bg-[#B71C1C] w-1/5"></div>
                 <div class="bg-[#FF6D00] w-1/5"></div>
                 <div class="bg-[#FFD600] w-1/5"></div>
