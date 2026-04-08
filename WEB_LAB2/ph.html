@@ -14,8 +14,9 @@
         function toggleTheme() { document.documentElement.classList.toggle('dark'); localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light'); }
         function toggleMenu() { document.getElementById('sidebar').classList.toggle('-translate-x-full'); document.getElementById('overlay').classList.toggle('hidden'); }
     </script>
+    <style>body { font-family: 'Inter', sans-serif; }</style>
 </head>
-<body class="bg-white dark:bg-aqua-bgDark text-black dark:text-white min-h-screen flex transition-colors duration-300 font-sans">
+<body class="bg-white dark:bg-aqua-bgDark text-black dark:text-white min-h-screen flex transition-colors duration-300">
 <div id="overlay" class="fixed inset-0 bg-black/50 z-30 hidden lg:hidden" onclick="toggleMenu()"></div>
 <aside id="sidebar" class="w-64 bg-aqua-teal dark:bg-aqua-dark fixed h-full text-white shadow-xl transition-transform duration-300 z-40 -translate-x-full lg:translate-x-0 flex flex-col">
     <div class="flex justify-end p-4 lg:hidden">

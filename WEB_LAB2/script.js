@@ -1,33 +1,28 @@
-// script.js
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- 1. Local Storage ---
     let updateInterval = localStorage.getItem('updateInterval') || 3000;
     let systemName = localStorage.getItem('systemName') || 'Система керування акваріумом';
 
     const titleElement = document.getElementById('system-title');
     if (titleElement) titleElement.textContent = systemName;
 
-    // --- 2. Емуляція датчиків (Температура, pH, Графік та Стрілочка) ---
     const phElement = document.getElementById('current-ph');
     const phArrow = document.getElementById('ph-arrow');
     const tempElement = document.getElementById('current-temp');
     const targetStatusBlock = document.getElementById('target-status-block');
 
-    // Елементи SVG графіка температур
     const tempLine = document.getElementById('temp-graph-line');
     const tempDot = document.getElementById('temp-graph-last-point');
 
     function getPHGoodnessColor(ph) {
         const value = parseFloat(ph);
-        if (value < 6.0 || value > 8.0) return '#EF4444'; // Червоний
-        if ((value >= 6.0 && value < 6.5) || (value > 7.5 && value <= 8.0)) return '#FBBF24'; // Жовтий
-        if (value >= 6.5 && value <= 7.5) return '#10B981'; // Зелений
+        if (value < 6.0 || value > 8.0) return '#EF4444';
+        if ((value >= 6.0 && value < 6.5) || (value > 7.5 && value <= 8.0)) return '#FBBF24';
+        if (value >= 6.5 && value <= 7.5) return '#10B981';
         return 'inherit';
     }
 
     function updateSensors() {
-        // Оновлення pH
         if (phElement && phArrow) {
             const ph = (7.0 + Math.random() * 0.5).toFixed(1);
             phElement.textContent = ph;
@@ -45,7 +40,6 @@ document.addEventListener('DOMContentLoaded', () => {
             phArrow.style.left = percent + '%';
         }
 
-        // Оновлення температури та плавний рух графіка
         if (tempElement) {
             const temp = (24.0 + Math.random() * 1.5).toFixed(1);
             tempElement.textContent = `${temp}°C`;
@@ -53,7 +47,6 @@ document.addEventListener('DOMContentLoaded', () => {
             if (tempLine && tempDot) {
                 const newY = (27 - parseFloat(temp)) * 75;
                 tempDot.setAttribute('cy', newY);
-                // Замість оновлення всього масиву points, тепер просто плавно рухаємо кінець лінії (y2)
                 tempLine.setAttribute('y2', newY);
             }
         }
@@ -62,7 +55,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let sensorTimer = setInterval(updateSensors, updateInterval);
     updateSensors();
 
-    // --- 3. Розумне годування (Логіка часу) ---
     const feedBtn = document.getElementById('manual-feed-btn');
     if (feedBtn) {
         feedBtn.addEventListener('click', () => {
@@ -100,7 +92,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- 4. Форма налаштувань ---
     const settingsForm = document.getElementById('settings-form');
     if (settingsForm) {
         settingsForm.elements['systemName'].value = systemName;

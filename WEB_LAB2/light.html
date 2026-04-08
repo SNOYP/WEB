@@ -11,7 +11,12 @@
     <script>
         tailwind.config = { darkMode: 'class', theme: { extend: { colors: { aqua: { teal: '#0A7065', dark: '#111111', coral: '#FF7D4A', coralDark: '#E76F51', bgLight: '#F3F4F6', bgDark: '#737373', cardDark: '#525252' } } } } }
         if (localStorage.getItem('theme') === 'dark') document.documentElement.classList.add('dark');
-        function toggleTheme() { document.documentElement.classList.toggle('dark'); localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light'); }
+        function toggleTheme() {
+            document.documentElement.classList.toggle('dark');
+            localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+            const slider = document.getElementById('intensitySlider');
+            if(slider) slider.dispatchEvent(new Event('input'));
+        }
         function toggleMenu() { document.getElementById('sidebar').classList.toggle('-translate-x-full'); document.getElementById('overlay').classList.toggle('hidden'); }
 
         document.addEventListener('DOMContentLoaded', () => {
@@ -19,7 +24,21 @@
             const statusText = document.getElementById('statusText');
             const slider = document.getElementById('intensitySlider');
             const intensityText = document.getElementById('intensityText');
+            const maxIntensitySpan = document.getElementById('max-intensity-val');
+
             let lastIntensity = 75;
+
+            function updateSliderFill() {
+                const val = slider.value;
+                const isDark = document.documentElement.classList.contains('dark');
+                const leftColor = isDark ? '#9CA3AF' : '#FF7D4A';
+                const rightColor = isDark ? '#374151' : '#E5E7EB';
+                slider.style.background = `linear-gradient(to right, ${leftColor} ${val}%, ${rightColor} ${val}%)`;
+
+                if (maxIntensitySpan) {
+                    maxIntensitySpan.textContent = val + '%';
+                }
+            }
 
             toggle.addEventListener('change', (e) => {
                 if (e.target.checked) {
@@ -36,6 +55,7 @@
                     intensityText.textContent = `Інтенсивність: 0%`;
                     slider.classList.add('opacity-50', 'cursor-not-allowed');
                 }
+                updateSliderFill();
             });
 
             slider.addEventListener('input', (e) => {
@@ -47,11 +67,15 @@
                     toggle.checked = true;
                     statusText.textContent = 'Стан: Увімкнутий';
                 }
+                updateSliderFill();
             });
+
+            updateSliderFill();
         });
     </script>
+    <style>body { font-family: 'Inter', sans-serif; }</style>
 </head>
-<body class="bg-white dark:bg-aqua-bgDark text-black dark:text-white min-h-screen flex transition-colors duration-300 font-sans">
+<body class="bg-white dark:bg-aqua-bgDark text-black dark:text-white min-h-screen flex transition-colors duration-300">
 <div id="overlay" class="fixed inset-0 bg-black/50 z-30 hidden lg:hidden" onclick="toggleMenu()"></div>
 <aside id="sidebar" class="w-64 bg-aqua-teal dark:bg-aqua-dark fixed h-full text-white shadow-xl transition-transform duration-300 z-40 -translate-x-full lg:translate-x-0 flex flex-col">
     <div class="flex justify-end p-4 lg:hidden">
@@ -84,7 +108,7 @@
                 <span id="statusText" class="text-xl md:text-2xl font-semibold">Стан: Увімкнутий</span>
             </div>
             <div class="flex flex-col items-center md:items-end gap-4 w-full md:w-1/2">
-                <input type="range" id="intensitySlider" min="0" max="100" value="75" class="w-full h-4 bg-gray-300 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer accent-aqua-coral dark:accent-aqua-coralDark transition-opacity">
+                <input type="range" id="intensitySlider" min="0" max="100" value="75" class="w-full h-4 rounded-lg appearance-none cursor-pointer accent-aqua-coral dark:accent-aqua-coralDark transition-opacity">
                 <span id="intensityText" class="text-xl md:text-2xl font-medium">Інтенсивність: 75%</span>
             </div>
         </div>
@@ -108,7 +132,7 @@
             <div class="bg-gray-100 dark:bg-black p-6 md:p-8 rounded-3xl shadow-inner transition-colors space-y-3 text-base md:text-lg font-medium border border-gray-200 dark:border-gray-800">
                 <h4 class="font-bold mb-4 text-lg md:text-xl">Інформація про лампу</h4>
                 <p>Тип: LED-панель</p>
-                <p>Макс. Інтенсивність: <span class="text-aqua-teal font-bold">85%</span></p>
+                <p>Макс. Інтенсивність: <span id="max-intensity-val" class="text-aqua-teal font-bold">75%</span></p>
                 <p>Час роботи сьогодні: 10:00</p>
             </div>
         </div>

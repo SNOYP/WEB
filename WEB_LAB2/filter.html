@@ -14,8 +14,9 @@
         function toggleTheme() { document.documentElement.classList.toggle('dark'); localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light'); }
         function toggleMenu() { document.getElementById('sidebar').classList.toggle('-translate-x-full'); document.getElementById('overlay').classList.toggle('hidden'); }
     </script>
+    <style>body { font-family: 'Inter', sans-serif; }</style>
 </head>
-<body class="bg-white dark:bg-aqua-bgDark text-black dark:text-white min-h-screen flex transition-colors duration-300 font-sans">
+<body class="bg-white dark:bg-aqua-bgDark text-black dark:text-white min-h-screen flex transition-colors duration-300">
 <div id="overlay" class="fixed inset-0 bg-black/50 z-30 hidden lg:hidden" onclick="toggleMenu()"></div>
 <aside id="sidebar" class="w-64 bg-aqua-teal dark:bg-aqua-dark fixed h-full text-white shadow-xl transition-transform duration-300 z-40 -translate-x-full lg:translate-x-0 flex flex-col">
     <div class="flex justify-end p-4 lg:hidden">
@@ -35,7 +36,7 @@
 <div class="flex-1 lg:ml-64 flex flex-col min-h-screen">
     <header class="bg-aqua-coral dark:bg-black h-20 flex items-center justify-center shadow-md transition-colors duration-300 relative">
         <button onclick="toggleMenu()" class="absolute left-6 lg:hidden text-2xl text-black dark:text-white"><i class="fa-solid fa-bars"></i></button>
-        <h1 id="system-title" class="text-xl md:text-2xl font-bold text-black dark:text-white transition-colors duration-300">Фільтри</h1>
+        <h1 class="text-xl md:text-2xl font-bold text-black dark:text-white transition-colors duration-300">Фільтри</h1>
     </header>
     <main class="p-6 md:p-16 flex-1 flex flex-col items-center justify-center mx-auto w-full max-w-3xl">
         <div class="space-y-4 md:space-y-6 text-2xl md:text-4xl font-bold mb-10 md:mb-16 self-start w-full">

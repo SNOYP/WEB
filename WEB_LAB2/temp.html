@@ -14,8 +14,9 @@
         function toggleTheme() { document.documentElement.classList.toggle('dark'); localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light'); }
         function toggleMenu() { document.getElementById('sidebar').classList.toggle('-translate-x-full'); document.getElementById('overlay').classList.toggle('hidden'); }
     </script>
+    <style>body { font-family: 'Inter', sans-serif; }</style>
 </head>
-<body class="bg-white dark:bg-aqua-bgDark text-black dark:text-white min-h-screen flex transition-colors duration-300 font-sans">
+<body class="bg-white dark:bg-aqua-bgDark text-black dark:text-white min-h-screen flex transition-colors duration-300">
 <div id="overlay" class="fixed inset-0 bg-black/50 z-30 hidden lg:hidden" onclick="toggleMenu()"></div>
 <aside id="sidebar" class="w-64 bg-aqua-teal dark:bg-aqua-dark fixed h-full text-white shadow-xl transition-transform duration-300 z-40 -translate-x-full lg:translate-x-0 flex flex-col">
     <div class="flex justify-end p-4 lg:hidden">
@@ -69,7 +70,6 @@
                         </g>
 
                         <polyline fill="none" class="stroke-aqua-coral dark:stroke-aqua-coralDark transition-colors" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" points="0,210 100,225 200,187.5 300,142.5 400,127.5" />
-
                         <line id="temp-graph-line" x1="400" y1="127.5" x2="500" y2="157.5" class="stroke-aqua-coral dark:stroke-aqua-coralDark transition-all duration-1000 ease-in-out" stroke-width="4" stroke-linecap="round" />
 
                         <g class="fill-aqua-coral dark:fill-aqua-coralDark stroke-white dark:stroke-aqua-cardDark transition-colors" stroke-width="3">
