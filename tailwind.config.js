@@ -1,21 +1,15 @@
-/** @type {import('tailwindcss').Config} */
 export default {
-    content: [
-        "./index.html",
-        "./src/**/*.{js,ts,jsx,tsx}",
-    ],
+    content: ["./index.html", "./src/**/*.{js,jsx}"],
     darkMode: 'class',
     theme: {
         extend: {
             colors: {
                 aqua: {
-                    teal: '#0A7065',
-                    dark: '#111111',
-                    coral: '#FF7D4A',
+                    teal: '#0A7065', // Existing highlight color
+                    dark: '#111111', // Dark sidebar bg
+                    coral: '#FF7D4A', // Range/button color
                     coralDark: '#E76F51',
-                    bgLight: '#F3F4F6',
-                    bgDark: '#737373',
-                    cardDark: '#525252'
+                    cardDark: '#525252' // Dark card bg
                 }
             }
         },

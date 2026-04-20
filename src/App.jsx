@@ -13,6 +13,23 @@ export default function App() {
     const [temp, setTemp] = useState(24.2);
     const [ph, setPh] = useState(7.2);
 
+    // Состояния для освещения с загрузкой сохраненных данных
+    const [isLightOn, setIsLightOn] = useState(() => {
+        const saved = localStorage.getItem('isLightOn');
+        return saved !== null ? JSON.parse(saved) : true;
+    });
+    const [lightIntensity, setLightIntensity] = useState(() => {
+        const saved = localStorage.getItem('lightIntensity');
+        return saved !== null ? JSON.parse(saved) : 75;
+    });
+
+    // Сохранение настроек при их изменении
+    useEffect(() => {
+        localStorage.setItem('isLightOn', JSON.stringify(isLightOn));
+        localStorage.setItem('lightIntensity', JSON.stringify(lightIntensity));
+    }, [isLightOn, lightIntensity]);
+
+    // Имитация датчиков (температура и pH)
     useEffect(() => {
         const timer = setInterval(() => {
             setTemp(+(24.0 + Math.random() * 1.5).toFixed(1));
@@ -27,17 +44,30 @@ export default function App() {
 
     const renderPage = () => {
         switch(activePage) {
-            case 'home': return <Home temp={temp} ph={ph} />;
-            case 'ph': return <PHPage ph={ph} />;
-            case 'temp': return <TempPage temp={temp} />;
-            case 'filter': return <FilterPage />;
-            case 'light': return <LightPage />;
-            default: return <Home temp={temp} ph={ph} />;
+            case 'home':
+                return <Home temp={temp} ph={ph} lightIntensity={isLightOn ? lightIntensity : 0} />;
+            case 'ph':
+                return <PHPage ph={ph} />;
+            case 'temp':
+                return <TempPage temp={temp} />;
+            case 'filter':
+                return <FilterPage />;
+            case 'light':
+                return (
+                    <LightPage
+                        isLightOn={isLightOn}
+                        setIsLightOn={setIsLightOn}
+                        intensity={lightIntensity}
+                        setIntensity={setLightIntensity}
+                    />
+                );
+            default:
+                return <Home temp={temp} ph={ph} lightIntensity={isLightOn ? lightIntensity : 0} />;
         }
     };
 
     return (
-        <div className="flex min-h-screen text-black dark:text-white">
+        <div className="flex min-h-screen text-gray-900 dark:text-white bg-[#F3F4F6] dark:bg-[#737373] transition-colors duration-300">
             <Sidebar activePage={activePage} setActivePage={setActivePage} toggleTheme={() => setDarkMode(!darkMode)} />
             <div className="flex-1 lg:ml-64 flex flex-col">
                 <Header activePage={activePage} />

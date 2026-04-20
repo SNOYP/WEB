@@ -3,4 +3,25 @@
 @tailwind utilities;
 
 body { font-family: 'Inter', sans-serif; }
-input[type="range"] { @apply accent-aqua-coral; }
+
+/* Global theme adjustments for ranges and form elements */
+input[type="range"] {
+    @apply accent-aqua-coral cursor-pointer;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    @apply bg-aqua-coral h-6 w-6 rounded-full appearance-none;
+}
+
+input[type="range"]::-moz-range-thumb {
+    @apply bg-aqua-coral h-6 w-6 rounded-full border-none;
+}
+
+/* Redefining range thumb in dark mode for correct appearance */
+.dark input[type="range"]::-webkit-slider-thumb {
+    @apply bg-aqua-coral;
+}
+
+.dark input[type="range"]::-moz-range-thumb {
+    @apply bg-aqua-coral;
+}
